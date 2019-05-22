@@ -40,7 +40,7 @@ public class MyApplication extends Application {
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
                 .methodCount(2)         // (Optional) How many method line to show. Default 2
-                .methodOffset(5)        // (Optional) Hides internal method calls up to offset. Default 5
+                .methodOffset(0)        // (Optional) Hides internal method calls up to offset. Default 5
 //                .logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
                 .tag(Constant.TAG)   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();

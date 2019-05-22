@@ -43,7 +43,7 @@ android {
     productFlavors {
         urlTest {
             signingConfig signingConfigs.release
-            buildConfigField 'String', 'SERVER_URL', '"http://www.test.com"'
+            buildConfigField 'String', 'SERVER_URL', '"http://58.30.9.142:43143/"'
 
         }
         urlRelease {
@@ -129,7 +129,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     //用到okhttp
     implementation 'com.squareup.okhttp3:okhttp:3.14.0'
-
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.0'
     //用到gson转换，来配合使用okhttp
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
@@ -164,14 +164,30 @@ dependencies {
 
     //>>>>>>>>>>>>>>>>>>>8【end】RxPermissions>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    //<<<<<<<<<<<<<<<<<<10【start】rxlifecycle<<<<<<<<<<<<<<<<<<
+    //<<<<<<<<<<<<<<<<<<9【start】rxlifecycle<<<<<<<<<<<<<<<<<<
 
     //   地址：https://github.com/trello/RxLifecycle
     //   用于处理使用RxJava导致页面生命周期造成的内存泄漏问题
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
 
-    //<<<<<<<<<<<<<<<<<<10【end】rxlifecycle<<<<<<<<<<<<<<<<<<
+    //<<<<<<<<<<<<<<<<<<9【end】rxlifecycle<<<<<<<<<<<<<<<<<<
 
+    //>>>>>>>>>>>>>>>>>>>10【start】ImmersionBar>>>>>>>>>>>>>>>>>>>
+
+    // android 4.4以上沉浸式状态栏和沉浸式导航栏管理，包括状态栏字体颜色，一句代码轻松实现，以及对bar的其他设置
+
+    //   地址：implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
+    implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
+
+    //>>>>>>>>>>>>>>>>>>>10【end】ImmersionBar>>>>>>>>>>>>>>>>>>>
+
+    //<<<<<<<<<<<<<<<<<<11【start】AndroidUtilCode<<<<<<<<<<<<<<<<<<
+
+    //   地址：https://github.com/Blankj/AndroidUtilCode
+    //  通用工具类库
+    implementation 'com.blankj:utilcode:1.22.0'
+
+    //<<<<<<<<<<<<<<<<<<11【end】AndroidUtilCode<<<<<<<<<<<<<<<<<<
 
 
 }
