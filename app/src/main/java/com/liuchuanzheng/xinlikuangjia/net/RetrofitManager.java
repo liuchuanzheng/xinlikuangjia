@@ -47,7 +47,12 @@ public class RetrofitManager {
                             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                             .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+                            //添加自定义log拦截器
                             .addInterceptor(new LoggingInterceptor())
+                            //添加一个统一处理某些事的拦截器
+                            .addInterceptor(new DoSomethingInterceptor())
+                            //失败重连
+                            .retryOnConnectionFailure(false)
                             .build();
                 }
             }

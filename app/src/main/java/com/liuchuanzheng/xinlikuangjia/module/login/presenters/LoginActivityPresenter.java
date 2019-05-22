@@ -8,6 +8,8 @@ import com.liuchuanzheng.xinlikuangjia.base.mvp.presenter.BasePresenter;
 import com.liuchuanzheng.xinlikuangjia.base.mvp.view.IBaseView;
 import com.liuchuanzheng.xinlikuangjia.module.login.beans.LoginResponseBean;
 import com.liuchuanzheng.xinlikuangjia.module.login.contracts.IContract;
+import com.orhanobut.logger.Logger;
+import com.trello.rxlifecycle2.LifecycleProvider;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -26,8 +28,8 @@ public class LoginActivityPresenter extends BasePresenter<IContract.Login.View> 
     }
 
     @Override
-    public void login(String username, String password) {
-        login_model.login(username, password).subscribe(new Observer<LoginResponseBean>() {
+    public void login(String username, String password, LifecycleProvider lifecycleProvider) {
+        login_model.login(username, password,lifecycleProvider,new Observer<LoginResponseBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -53,6 +55,7 @@ public class LoginActivityPresenter extends BasePresenter<IContract.Login.View> 
 
             @Override
             public void onError(Throwable e) {
+                Logger.i("onError"+e);
                 if (mView == null) {
                     //说明view已经销毁了,没必要再去显示了.也防止了空指针.
                     return;
@@ -67,6 +70,7 @@ public class LoginActivityPresenter extends BasePresenter<IContract.Login.View> 
                     return;
                 }
                 mView.onComplete();
+                Logger.i("onComplete");
             }
         });
 

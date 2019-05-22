@@ -3,11 +3,12 @@ package com.liuchuanzheng.xinlikuangjia.base.mvp.model;
 import com.liuchuanzheng.xinlikuangjia.module.login.beans.LoginResponseBean;
 import com.liuchuanzheng.xinlikuangjia.net.ApiService;
 import com.liuchuanzheng.xinlikuangjia.net.RetrofitManager;
+import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -27,35 +28,19 @@ public class BaseModel implements IBaseModel {
     }
 
     public class Login {
-        public Observable<LoginResponseBean> login(String username, String password) {
+        public void login(String username, String password, LifecycleProvider lifecycleProvider, Observer<LoginResponseBean> observer) {
             Map<String, String> paramsLogin = new HashMap<>();
             paramsLogin.put("mobile", username);
             paramsLogin.put("password", password);
-            Observable<LoginResponseBean> observable = RetrofitManager.create(ApiService.class)
+            RetrofitManager.create(ApiService.class)
                     .login(paramsLogin)
+                    //绑定生命周期
+                    .compose(lifecycleProvider.<LoginResponseBean>bindToLifecycle())
                     .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
-            return observable;
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
 
         }
     }
-    /*public class Home {
-        public Observable<HomeArticleListReaponseBean> getArticleList(int page) {
-            Observable<HomeArticleListReaponseBean> observable = RetrofitManager.create(ApiService.class)
-                    .getArticleList(page)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
-            return observable;
-        }
-
-        public Observable<BannerResponseBean> getBanner() {
-            Observable<BannerResponseBean> observable = RetrofitManager.create(ApiService.class)
-                    .getBanner()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
-            return observable;
-        }
-    }
-*/
 
 }
