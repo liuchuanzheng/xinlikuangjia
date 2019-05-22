@@ -21,6 +21,7 @@ public class LoginActivity extends BaseMVPActivity<IContract.Login.View, LoginAc
             @Override
             public void onLogin(LoginResponseBean responseBean, int resultType, String errorMsg) {
                 ToastUtils.showLong(errorMsg);
+                hideDialog();
                 switch (resultType) {
                     case IBaseView.NET_ERROR:
                         ToastUtils.showLong(getString(R.string.net_error));
@@ -57,6 +58,7 @@ public class LoginActivity extends BaseMVPActivity<IContract.Login.View, LoginAc
 
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
+        showLogingDialog();
         mPresenter.login("18501231486","123456",this);
     }
 }

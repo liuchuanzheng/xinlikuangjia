@@ -1,8 +1,8 @@
 package com.liuchuanzheng.xinlikuangjia.base;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.liuchuanzheng.xinlikuangjia.R;
@@ -22,6 +22,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected BaseActivity activity;
 
     private Unbinder unbinder;
+
+    private ProgressDialog mDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,11 +55,40 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        hideDialog();
         ImmersionBar.with(this).destroy();
         activityStackUtil.removeActivity(this);
         unbinder.unbind();
         super.onDestroy();
 
+    }
+
+    /**
+     * 创建并show加载进度框
+     *
+     * @param msg
+     * @param cancelAble
+     */
+    public void showLoadingDialog(String msg, boolean cancelAble) {
+        hideDialog();
+        mDialog = new ProgressDialog(this);
+        mDialog.setMessage(msg);
+        mDialog.setCancelable(cancelAble);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialog.show();
+    }
+    public void showLogingDialog() {
+        showLoadingDialog("加载中。。。", false);
+    }
+
+    /**
+     * 隐藏加载进度框
+     */
+    public void hideDialog() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
+        mDialog = null;
     }
 
 }
