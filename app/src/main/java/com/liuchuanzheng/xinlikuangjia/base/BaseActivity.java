@@ -39,8 +39,12 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     private void initStatusColor() {
         ImmersionBar.with(this)
-                .statusBarColor(R.color.colorPrimary)
-                .fitsSystemWindows(true)  //使用该属性必须指定状态栏的颜色，不然状态栏透明，很难看
+                //状态栏颜色
+                .statusBarColor(R.color.common_bg)
+                //状态栏文字颜色
+                .statusBarDarkFont(true)
+                //使用该属性必须指定状态栏的颜色，不然状态栏透明，很难看. true表示布局嵌入状态栏。false表示布局避开状态栏
+                .fitsSystemWindows(true)
                 .init();
     }
 
