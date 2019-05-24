@@ -71,7 +71,7 @@ public class RetrofitManager {
     public static <T> T create(Class<T> clazz) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Constant.REQUEST_BASE_URL)
+                    .baseUrl(Constant.Url.request_base_url)
                     .client(getOkHttpClient())
                     .addConverterFactory(GsonConverterFactory.create())// 添加Gson转换器
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 添加Rx适配器

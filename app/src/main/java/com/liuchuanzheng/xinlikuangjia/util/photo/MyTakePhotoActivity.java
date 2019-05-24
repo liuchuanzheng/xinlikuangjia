@@ -128,7 +128,7 @@ public class MyTakePhotoActivity extends Activity {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //第二个参数为 包名.fileprovider
-                uri = FileProvider.getUriForFile(this, "com.visionvera.doctor.fileprovider", mTmpFile);
+                uri = FileProvider.getUriForFile(this, "com.liuchuanzheng.xinlikuangjia.fileprovider", mTmpFile);
                 cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             } else {
                 uri = Uri.fromFile(mTmpFile);
