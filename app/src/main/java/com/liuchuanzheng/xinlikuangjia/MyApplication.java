@@ -3,7 +3,9 @@ package com.liuchuanzheng.xinlikuangjia;
 import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.view.Gravity;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.liuchuanzheng.xinlikuangjia.base.Constant;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -31,8 +33,20 @@ public class MyApplication extends Application {
         super.onCreate();
         myApplication = this;
         initLog();
+        initToastUtil();
     }
 
+    public static synchronized MyApplication getInstance() {
+        return myApplication;
+    }
+
+    /**
+     * 配置toast样式等
+     */
+    private void initToastUtil() {
+        ToastUtils.setBgColor(getResources().getColor(R.color.colorAccent));
+        ToastUtils.setGravity(Gravity.CENTER,0,0);
+    }
     /**
      * 初始化logger库
      */
@@ -53,9 +67,7 @@ public class MyApplication extends Application {
         });
     }
 
-    public static synchronized MyApplication getInstance() {
-        return myApplication;
-    }
+
 
     //static 代码段可以防止内存泄露
     static {
