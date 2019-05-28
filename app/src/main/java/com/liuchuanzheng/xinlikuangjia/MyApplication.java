@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 
+import com.blankj.utilcode.util.AdaptScreenUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.liuchuanzheng.xinlikuangjia.base.Constant;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -45,7 +46,7 @@ public class MyApplication extends Application {
      */
     private void initToastUtil() {
         ToastUtils.setBgColor(getResources().getColor(R.color.colorAccent));
-        ToastUtils.setGravity(Gravity.CENTER,0,0);
+        ToastUtils.setGravity(Gravity.BOTTOM,0, AdaptScreenUtils.pt2Px(20));
     }
     /**
      * 初始化logger库

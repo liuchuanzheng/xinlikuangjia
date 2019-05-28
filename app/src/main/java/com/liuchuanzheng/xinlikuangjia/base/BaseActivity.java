@@ -1,12 +1,13 @@
 package com.liuchuanzheng.xinlikuangjia.base;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.liuchuanzheng.xinlikuangjia.R;
 import com.liuchuanzheng.xinlikuangjia.util.activity.ActivityStackUtil;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
@@ -23,7 +24,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     private Unbinder unbinder;
 
-    private ProgressDialog mDialog;
+    public BasePopupView loadingPopup;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,24 +76,25 @@ public abstract class BaseActivity extends RxAppCompatActivity {
      */
     public void showLoadingDialog(String msg, boolean cancelAble) {
         hideDialog();
-        mDialog = new ProgressDialog(this);
-        mDialog.setMessage(msg);
-        mDialog.setCancelable(cancelAble);
-        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mDialog.show();
+        loadingPopup =  new XPopup.Builder(activity)
+                .dismissOnBackPressed(cancelAble)
+                .dismissOnTouchOutside(cancelAble)
+                .asLoading(msg)
+                .show();
     }
     public void showLogingDialog() {
-        showLoadingDialog("加载中。。。", false);
+        showLoadingDialog("正在加载中",false);
+
     }
 
     /**
      * 隐藏加载进度框
      */
     public void hideDialog() {
-        if (mDialog != null) {
-            mDialog.dismiss();
+        if (loadingPopup != null) {
+            loadingPopup.dismiss();
         }
-        mDialog = null;
+        loadingPopup = null;
     }
 
 }

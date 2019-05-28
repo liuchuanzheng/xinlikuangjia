@@ -1,7 +1,5 @@
 package com.liuchuanzheng.xinlikuangjia.module.login;
 
-import android.widget.Toast;
-
 import com.blankj.utilcode.util.ToastUtils;
 import com.liuchuanzheng.xinlikuangjia.BuildConfig;
 import com.liuchuanzheng.xinlikuangjia.R;
@@ -51,7 +49,7 @@ public class LoginActivity extends BaseMVPActivity<IContract.Login.View, LoginAc
 
     @Override
     protected void doYourself() {
-        Toast.makeText(this, BuildConfig.FLAVOR + "--" + BuildConfig.BUILD_TYPE + "--" + BuildConfig.LOG + "--" + BuildConfig.SERVER_URL, Toast.LENGTH_LONG).show();
+        ToastUtils.showLong(BuildConfig.FLAVOR + "--" + BuildConfig.BUILD_TYPE + "--" + BuildConfig.LOG + "--" + BuildConfig.SERVER_URL);
         Logger.i( BuildConfig.FLAVOR + "--" + BuildConfig.BUILD_TYPE + "--" + BuildConfig.LOG + "--" + BuildConfig.SERVER_URL);
     }
 
